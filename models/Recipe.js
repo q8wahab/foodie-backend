@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 
 const recipeSchema = new mongoose.Schema({
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    required: true,
+  },
+
   title: String,
-  ingredients: [
-    {
-      name: String,
-      //   quantity: String,
-    },
-  ],
+  ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" }],
   instructions: {
     type: String,
     required: true,

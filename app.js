@@ -7,6 +7,7 @@ const CategoryRouter = require("./api/category/routes");
 const notFoundHandler = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
 const RecipeRouter = require("./api/recipe/routes");
+const IngredientRouter = require("./api/ingredient/routes");
 // const passport = require("passport");
 // const { localStrategy, jwtStrategy } = require("./middlewares/passport");
 
@@ -20,6 +21,7 @@ app.use(cors());
 
 app.use("/category", CategoryRouter);
 app.use("/recipe", RecipeRouter);
+app.use("/ingredient", IngredientRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
