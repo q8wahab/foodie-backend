@@ -29,5 +29,6 @@ CategoryRouter.put(
   passport.authenticate("jwt", { session: false }),
   updateOneCatogry
 );
+// onCategory
 
 module.exports = CategoryRouter;
