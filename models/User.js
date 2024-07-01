@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  username: String,
-  password: String,
+  username: { type: String, unique: true, requiered: true },
+  password: { type: String, requiered: true },
   recipe: [
     {
       type: mongoose.Schema.Types.ObjectId,

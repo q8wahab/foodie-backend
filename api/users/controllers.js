@@ -25,5 +25,14 @@ const signup = async (req, res, next) => {
     next(err);
   }
 };
+const signin = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const token = generateToken(user);
+    return res.status(200).json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
 
-module.exports = { signup };
+module.exports = { signup, signin };
