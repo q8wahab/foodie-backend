@@ -11,7 +11,6 @@ const recipeSchema = new mongoose.Schema({
   ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" }],
   instructions: {
     type: String,
-    required: true,
   },
   prepTime: {
     type: Number, // in minutes
@@ -26,11 +25,7 @@ const recipeSchema = new mongoose.Schema({
     },
   },
 
-  //   createBy: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "User",
-  //     required: true,
-  //   },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
 module.exports = mongoose.model("Recipe", recipeSchema);

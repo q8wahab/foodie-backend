@@ -15,8 +15,16 @@ RecipeRouter.get(
   passport.authenticate("jwt", { session: false }),
   getAllRecipes
 );
-RecipeRouter.post("/", CreateRecipe);
-RecipeRouter.delete("/:id", delOneRecipe);
+RecipeRouter.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  CreateRecipe
+);
+RecipeRouter.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  delOneRecipe
+);
 RecipeRouter.put("/:id", updateOneRecipe);
 RecipeRouter.get("/search", searchRecipes);
 module.exports = RecipeRouter;

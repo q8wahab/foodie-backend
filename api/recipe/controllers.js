@@ -13,6 +13,7 @@ const getAllRecipes = async (req, res, next) => {
 
 const CreateRecipe = async (req, res, next) => {
   try {
+    req.body.user = req.user._id;
     const recipe = await Recipe.create(req.body);
     return res.status(201).json(recipe);
   } catch (error) {

@@ -5,11 +5,25 @@ const {
   delOneCategory,
   updateOneCatogry,
 } = require("./controllers");
+const passport = require("passport");
+
 const CategoryRouter = express.Router();
 
 CategoryRouter.get("/", getAllcategories);
-CategoryRouter.post("/", CreateCategory);
-CategoryRouter.delete("/:id", delOneCategory);
-CategoryRouter.put("/:id", updateOneCatogry);
+CategoryRouter.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  CreateCategory
+);
+CategoryRouter.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  delOneCategory
+);
+CategoryRouter.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  updateOneCatogry
+);
 
 module.exports = CategoryRouter;
