@@ -6,10 +6,15 @@ const {
   updateOneRecipe,
   searchRecipes,
 } = require("./controllers");
+const passport = require("passport");
 
 const RecipeRouter = express.Router();
 
-RecipeRouter.get("/", getAllRecipes);
+RecipeRouter.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  getAllRecipes
+);
 RecipeRouter.post("/", CreateRecipe);
 RecipeRouter.delete("/:id", delOneRecipe);
 RecipeRouter.put("/:id", updateOneRecipe);
