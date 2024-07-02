@@ -1,3 +1,4 @@
+const Category = require("../../models/Category");
 const Recipe = require("../../models/Recipe");
 
 const getAllRecipes = async (req, res, next) => {
@@ -15,6 +16,7 @@ const CreateRecipe = async (req, res, next) => {
   try {
     req.body.user = req.user._id;
     const recipe = await Recipe.create(req.body);
+    await Category.findOneAndUpdate();
     return res.status(201).json(recipe);
   } catch (error) {
     next(error);
