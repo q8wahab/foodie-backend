@@ -9,11 +9,7 @@ const passport = require("passport");
 
 const CategoryRouter = express.Router();
 
-CategoryRouter.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  getAllcategories
-);
+CategoryRouter.get("/", getAllcategories);
 CategoryRouter.post(
   "/",
   passport.authenticate("jwt", { session: false }),

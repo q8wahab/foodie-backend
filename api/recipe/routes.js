@@ -10,11 +10,7 @@ const passport = require("passport");
 
 const RecipeRouter = express.Router();
 
-RecipeRouter.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  getAllRecipes
-);
+RecipeRouter.get("/", getAllRecipes);
 RecipeRouter.post(
   "/",
   passport.authenticate("jwt", { session: false }),
