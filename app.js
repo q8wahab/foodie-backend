@@ -14,7 +14,7 @@ const { localStrategy, jwtStrategy } = require("./middlewares/passport");
 const router = require("./api/users/routes");
 
 dotenv.config();
-connectDb();
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
@@ -22,14 +22,15 @@ app.use(passport.initialize());
 passport.use("local", localStrategy);
 passport.use("jwt", jwtStrategy);
 
+app.use(router);
 app.use("/category", CategoryRouter);
 app.use("/recipe", RecipeRouter);
 app.use("/ingredient", IngredientRouter);
-app.use(router);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
 
+connectDb();
 app.listen(8000, () => {
   console.log("The application is running on localhost:8000");
 });
