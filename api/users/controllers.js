@@ -61,4 +61,23 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, signin, getUserProfile, getAllUsers };
+const updateUser = async (req, res, next) => {
+  try {
+    const userId = req.user._id;
+    const updateData = {};
+
+    if (req.file) {
+      updateData.image = req.file.path;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+    });
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { signup, signin, getUserProfile, getAllUsers, updateUser };
