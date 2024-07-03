@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
       ref: "Recipe",
     },
   ],
+  image: String,
 });
 
 module.exports = mongoose.model("User", UserSchema);

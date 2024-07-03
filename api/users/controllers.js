@@ -15,7 +15,9 @@ const generateToken = (user) => {
 const signup = async (req, res, next) => {
   try {
     //hash the password
-
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
     console.log("body", req.body);
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
@@ -44,7 +46,7 @@ const getUserProfile = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json({ username: user.username });
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }

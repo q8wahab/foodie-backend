@@ -8,15 +8,16 @@ const {
   getAllUsers,
 } = require("./controllers");
 const passport = require("passport");
+const upload = require("../../middlewares/multer");
 
-router.post("/signup", signup);
+router.post("/signup", upload.single("image"), signup);
 router.post(
   "/signin",
   passport.authenticate("local", { session: false }),
   signin
 );
 router.get(
-  "/me/:id",
+  "/me",
   passport.authenticate("jwt", { session: false }),
   getUserProfile
 );

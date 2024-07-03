@@ -12,6 +12,7 @@ const passport = require("passport");
 const dotenv = require("dotenv");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
 const router = require("./api/users/routes");
+const path = require("path");
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(router);
 app.use("/category", CategoryRouter);
 app.use("/recipe", RecipeRouter);
 app.use("/ingredient", IngredientRouter);
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use(notFoundHandler);
 app.use(errorHandler);
