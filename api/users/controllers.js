@@ -37,4 +37,16 @@ const signin = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, signin };
+const getUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id).select("username");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ username: user.username });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { signup, signin, getUserProfile };
