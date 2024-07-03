@@ -50,4 +50,13 @@ const getUserProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, signin, getUserProfile };
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(201).json(users);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { signup, signin, getUserProfile, getAllUsers };
