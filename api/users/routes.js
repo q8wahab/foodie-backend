@@ -10,6 +10,10 @@ router.post(
   passport.authenticate("local", { session: false }),
   signin
 );
-router.get("/me", getUserProfile);
+router.get(
+  "/me",
+  passport.authenticate("jwt", { session: false }),
+  getUserProfile
+);
 
 module.exports = router;
