@@ -7,12 +7,14 @@ const {
   searchRecipes,
 } = require("./controllers");
 const passport = require("passport");
+const upload = require("../../middlewares/multer");
 
 const RecipeRouter = express.Router();
 
 RecipeRouter.get("/", getAllRecipes);
 RecipeRouter.post(
   "/",
+  upload.single("image"),
   passport.authenticate("jwt", { session: false }),
   CreateRecipe
 );

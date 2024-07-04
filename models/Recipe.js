@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const recipeSchema = new mongoose.Schema({
+  image: String,
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",

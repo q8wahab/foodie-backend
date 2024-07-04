@@ -14,6 +14,9 @@ const getAllRecipes = async (req, res, next) => {
 
 const CreateRecipe = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
     req.body.user = req.user._id;
     const recipe = await Recipe.create(req.body);
     await Category.findOneAndUpdate(
