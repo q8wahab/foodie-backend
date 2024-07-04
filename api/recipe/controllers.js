@@ -18,12 +18,15 @@ const CreateRecipe = async (req, res, next) => {
       req.body.image = req.file.path;
     }
     req.body.user = req.user._id;
+
     const recipe = await Recipe.create(req.body);
+
     await Category.findOneAndUpdate(
-      { _id: req.body.categoryId },
+      { _id: req.body.category },
       { $push: { recipes: recipe._id } },
       { new: true, useFindAndModify: false }
     );
+
     return res.status(201).json(recipe);
   } catch (error) {
     next(error);
