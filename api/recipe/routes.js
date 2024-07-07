@@ -27,5 +27,5 @@ RecipeRouter.delete(
 RecipeRouter.put("/:id", updateOneRecipe);
 RecipeRouter.get("/search", searchRecipes);
 
-RecipeRouter.get("/recipes/category/:categoryId", getRecipesByCategory);
+RecipeRouter.get("/category/:categoryId", getRecipesByCategory);
 module.exports = RecipeRouter;

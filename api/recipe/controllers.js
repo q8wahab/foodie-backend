@@ -83,24 +83,24 @@ const searchRecipes = async (req, res, next) => {
 };
 
 const getRecipesByCategory = async (req, res, next) => {
-  const { categoryId } = req.params;
   try {
+    const { categoryId } = req.params;
+
+    const category = await Category.findById(categoryId);
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
     const recipes = await Recipe.find({ category: categoryId })
       .populate("user", "username")
       .populate("category")
       .populate("ingredients");
-    if (recipes) {
-      return res.status(200).json(recipes);
-    } else {
-      return res
-        .status(404)
-        .json({ msg: "No recipes found for this category" });
-    }
+
+    return res.status(200).json(recipes);
   } catch (error) {
     next(error);
   }
 };
-
 module.exports = {
   getAllRecipes,
   CreateRecipe,
