@@ -5,6 +5,7 @@ const {
   delOneRecipe,
   updateOneRecipe,
   searchRecipes,
+  getRecipesByCategory,
 } = require("./controllers");
 const passport = require("passport");
 const upload = require("../../middlewares/multer");
@@ -25,4 +26,6 @@ RecipeRouter.delete(
 );
 RecipeRouter.put("/:id", updateOneRecipe);
 RecipeRouter.get("/search", searchRecipes);
+
+RecipeRouter.get("/recipes/category/:categoryId", getRecipesByCategory);
 module.exports = RecipeRouter;

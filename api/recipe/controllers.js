@@ -4,6 +4,7 @@ const Recipe = require("../../models/Recipe");
 const getAllRecipes = async (req, res, next) => {
   try {
     const Recipes = await Recipe.find()
+      .populate("user", "username")
       .populate("category")
       .populate("ingredients");
     res.status(201).json(Recipes);
@@ -81,10 +82,30 @@ const searchRecipes = async (req, res, next) => {
   }
 };
 
+const getRecipesByCategory = async (req, res, next) => {
+  const { categoryId } = req.params;
+  try {
+    const recipes = await Recipe.find({ category: categoryId })
+      .populate("user", "username")
+      .populate("category")
+      .populate("ingredients");
+    if (recipes) {
+      return res.status(200).json(recipes);
+    } else {
+      return res
+        .status(404)
+        .json({ msg: "No recipes found for this category" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllRecipes,
   CreateRecipe,
   delOneRecipe,
   updateOneRecipe,
   searchRecipes,
+  getRecipesByCategory,
 };
